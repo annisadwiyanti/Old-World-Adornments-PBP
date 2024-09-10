@@ -41,14 +41,14 @@
 5. **Melakukan konfigurasi URLs:**
    - Menambahkan routing di `urls.py` aplikasi main untuk menghubungkan `view` dengan URL.
      ```
-    from django.urls import path
-    from main.views import show_main
+        from django.urls import path
+        from main.views import show_main
 
-    app_name = 'main'
+        app_name = 'main'
 
-    urlpatterns = [
-        path('', show_main, name='show_main'),
-    ]
+        urlpatterns = [
+            path('', show_main, name='show_main'),
+        ]
      ```
 
 6. **Deployment:**
@@ -76,11 +76,9 @@ Git merupakan alat kontrol versi yang digunakan untuk memantau perubahan pada ko
 
 ### 4. Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?
 
-1. **Kemudahan Penggunaan**: Menyediakan banyak fitur bawaan yang memudahkan pengembang pemula untuk memulai tanpa harus membangun semuanya dari awal. Ini membuat proses belajar menjadi lebih cepat dan efisien.
-
-2. **Dokumentasi yang Lengkap**: Memiliki dokumentasi yang sangat baik dan komprehensif, yang sangat membantu bagi pemula untuk memahami konsep-konsep dasar dan mendapatkan panduan langkah demi langkah.
-
-3. **Keamanan**: Memiliki banyak fitur keamanan bawaan yang membantu melindungi aplikasi dari serangan umum seperti SQL injection dan cross-site scripting (XSS). Ini memberikan pemahaman awal tentang pentingnya keamanan dalam pengembangan perangkat lunak.
+- **Kemudahan Penggunaan**: Menyediakan banyak fitur bawaan yang memudahkan pengembang pemula untuk memulai tanpa harus membangun semuanya dari awal. Ini membuat proses belajar menjadi lebih cepat dan efisien.
+- **Dokumentasi yang Lengkap**: Memiliki dokumentasi yang sangat baik dan komprehensif, yang sangat membantu bagi pemula untuk memahami konsep-konsep dasar dan mendapatkan panduan langkah demi langkah.
+- **Keamanan**: Memiliki banyak fitur keamanan bawaan yang membantu melindungi aplikasi dari serangan umum seperti SQL injection dan cross-site scripting (XSS). Ini memberikan pemahaman awal tentang pentingnya keamanan dalam pengembangan perangkat lunak.
 
 ### 5. Mengapa model pada Django disebut sebagai ORM?
 
