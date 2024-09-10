@@ -1,6 +1,6 @@
 # Old-World Adornments
 
-### Akses aplikasi pada:
+### Akses aplikasi pada link berikut👇🏻
 [Old-World Adornments Website](http://annisa-dwiyanti-oldworldadornmentspbp.pbp.cs.ui.ac.id/)
 
 ### 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
