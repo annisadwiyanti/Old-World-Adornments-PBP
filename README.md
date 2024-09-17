@@ -3,6 +3,7 @@
 ### Akses aplikasi pada link berikut👇🏻
 [Old-World Adornments Website](http://annisa-dwiyanti-oldworldadornmentspbp.pbp.cs.ui.ac.id/)
 
+## Tugas 2
 ### 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 
 1. **Setup Environment:**
@@ -86,3 +87,61 @@ Karena berfungsi sebagai jembatan antara database relasional dan objek dalam kod
 - **Abstraksi Database:** ORM memungkinkan pengembang untuk berinteraksi dengan database menggunakan objek Python alih-alih menulis query SQL secara langsung, membuat kode lebih bersih dan mudah dipahami.
 - **Mapping Objek ke Tabel:** Dalam ORM, setiap model Django merepresentasikan tabel dalam database. Setiap atribut model merepresentasikan kolom dalam tabel tersebut. Dengan demikian, ORM memetakan objek Python ke tabel database relasional.
 - **Operasi CRUD:** ORM memudahkan operasi Create, Read, Update, dan Delete (CRUD) pada database. Pengembang dapat melakukan operasi ini dengan metode Python yang sederhana tanpa perlu menulis query SQL yang kompleks.
+
+
+## Tugas 3
+### 1. Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
+Data delivery penting dalam pengimplementasian sebuah platform karena memungkinkan transfer data atau komunikasi anatara server dan klien ataupun antara berbagai komponen sistem, aplikasi, atau layanan. Ini memastikan bahwa data yang dibutuhkan tersedia di tempat yang tepat dan waktu yang tepat, memungkinkan integrasi yang lancar dan operasional yang efisien. Tanpa data delivery yang efektif, platform mungkin mengalami keterlambatan, kehilangan data, atau ketidakcocokan data, yang dapat menghambat fungsionalitas dan kinerja keseluruhan.
+
+### 2. Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+Kedua format, XML dan JSON, memiliki kelebihan dan kekurangannya masing-masing,
+**XML:**
+   - Kelebihan: Mendukung skema yang kompleks, validasi data, dan namespace.
+   - Kekurangan: Lebih verbose, lebih sulit dibaca manusia, dan parsing yang lebih lambat.
+**JSON:**
+   - Kelebihan: Lebih ringan, lebih mudah dibaca manusia, dan parsing yang lebih cepat.
+   - Kekurangan: Kurang mendukung skema yang kompleks dan validasi data.
+
+JSON dianggap lebih baik dibandingkan XML karena kesederhanaannya dan efisiensinya dalam pengiriman data, terutama dalam aplikasi web dan API. JSON lebih mudah dibaca dan ditulis oleh manusia, serta lebih cepat diproses oleh mesin, menjadikannya pilihan yang lebih praktis dalam aplikasi web.
+
+### 3. Jelaskan fungsi dari method `is_valid()` pada form Django dan mengapa kita membutuhkan method tersebut?
+Method `is_valid()` pada form Django digunakan untuk memeriksa apakah data yang dimasukkan ke dalam form memenuhi semua persyaratan validasi yang telah didefinisikan, seperti tipe data yang benar, panjang karakter, atau pola tertentu. Method ini mengembalikan nilai boolean `True` atau `False`. Jika `is_valid()` mengembalikan `True`, data form dianggap valid dan dapat diproses lebih lanjut. Jika `False`, form akan mengandung pesan kesalahan yang menjelaskan mengapa data tidak valid. Method ini penting untuk memastikan bahwa data yang diterima oleh aplikasi adalah data yang benar dan sesuai dengan aturan yang telah ditetapkan, sehingga mencegah kesalahan dan potensi masalah keamanan.
+
+### 4. Mengapa kita membutuhkan `csrf_token` saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan `csrf_token` pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+`csrf_token` digunakan untuk melindungi aplikasi web dari serangan CSRF (Cross-Site Request Forgery), di mana penyerang dapat membuat pengguna yang terautentikasi melakukan tindakan yang tidak diinginkan di aplikasi web tanpa sepengetahuan mereka. Jika kita tidak menambahkan `csrf_token` pada form Django, aplikasi menjadi rentan terhadap serangan CSRF. Penyerang dapat memanfaatkan kelemahan ini untuk mengirim permintaan berbahaya yang tampaknya sah dari pengguna yang terautentikasi, seperti mengubah kata sandi atau melakukan transaksi tanpa izin. Dengan `csrf_token`, Django memvalidasi bahwa permintaan yang dibuat berasal dari pengguna yang benar-benar mengunjungi situs, bukan dari sumber eksternal yang tidak sah.
+
+### 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+1. **Pertama**
+saya membuat project Django dan memetakan struktur aplikasinya, seperti model, views, dan template.
+Kemudian, saya mulai dengan membuat form dan menggunakan method is_valid() untuk memvalidasi data input.
+Selanjutnya, saya memastikan bahwa setiap form memiliki csrf_token untuk melindungi aplikasi dari serangan CSRF.
+Setelah itu, saya memastikan penggunaan JSON sebagai format pengiriman data yang efisien antara klien dan server.
+Terakhir, saya melakukan testing secara berkala untuk memastikan bahwa semua langkah berjalan sesuai harapan dan aplikasi bebas dari masalah validasi serta keamanan.
+1. **Membuat Input Form**
+   - Mengimplemntasikan skeleton dengan membuat berkas `base.html` sebagai template dasar untuk halaman web lainnya di dalam proyek.
+   - Mengubah Primary Key Dari Integer Menjadi UUID pada `models.py` lalu melakukan migrasi.
+   - Membuat file `forms.py` untuk membuat struktur form yang akan menerima data entry yang baru.
+   - Menambahkan import redirect pada `views.py` lalu membuat fungsi baru `create_adornments_entry` yang menerima parameter `request` yang nantinya akan menambah data entry secara otomatis.
+   - Melakukan import fungsi yang dibuat sebelumnya dan menambhakan path URL.
+   - Membuat berkas `create_adornments_entry.html`, menambhkan `csrf_token`, dan `{% block content %}` untuk menampilkan data d serta tombol baru yang akan redirect langsung ke form.
+   - Menjalankan perintah `python manage.py runserver`
+
+2. **Menambahkan Views untuk Menampilkan Data dalam Format XML dan JSON**
+   - Menambahkan import `HttpResponse` dan `Serializer`
+   - Membuat fungsi yang menerima parameter request dan menambahkan return function `HttpResponse`, untuk mengembalikan data dalam bentuk `XML`
+   - Membuat fungsi yang menerima parameter request dan menambahkan return function `HttpResponse`, untuk mengembalikan data dalam bentuk `json`
+   - Membuat fungsi yang menyimpan hasil query data dengan id tertentu dan menambahkan return function `HttpResponse` dengan value `application/xml` dan `application/json`
+
+3. **Membuat Routing URL**
+   - Manambahkan import untuk fungsi yang dibuat sebelumnya `show_xml`, `show_json`, `show_xml_by_id`, dan `show_json_by_id`
+   - Menambahkan path URL untuk keempat fungsi yang sebelumnya diimport
+
+### SCREENSHOTS POSTMAN
+**POSTMAN XML**
+![Request Get XML](XML.jpeg)
+**POSTMAN json**
+![Request Get json](json.jpeg)
+**POSTMAN XML by ID**
+![Request Get XML by ID](XMLbyID.jpeg)
+**POSTMAN json by ID**
+![Request Get json by ID](jsonbyID.jpeg)

@@ -1,67 +1,117 @@
-<!-- <h1>Old-World Adornments</h1>
+{% extends 'base.html' %}
 
-<h5>Name: </h5>
-<p>{{ name }}<p>
-<h5>Class: </h5>
-<p>{{ class }}<p> -->
+{% block meta %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Old-World Adornments</title>
+<style>
+    body {
+        font-family: 'Times New Roman', serif;
+        background-image: url('https://i.pinimg.com/originals/e8/1f/21/e81f21e94c1cb1652bf6437baa8c2f68.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .container {
+        background-color: rgba(255, 255, 255, 0.9); /* Slight transparency */
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        width: 100%;
+        text-align: center;
+    }
+    h1 {
+        color: #333;
+        font-size: 3.2em;
+        margin-bottom: 20px;
+        font-style: italic;
+        font-weight: bold;
+    }
+    .by-line {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.2em;
+        font-weight: 600;
+        color: #555;
+        margin-bottom: 5px;
+    }
+    .by-line span {
+        font-weight: normal;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+    table, th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+    th {
+        background-color: #f2f2f2;
+        color: #333;
+    }
+    td {
+        text-align: center;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+</style>
+{% endblock meta %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Old-World Adornments</title>
-    <style>
-        body {
-            font-family: 'Times New Roman', serif;
-            background-image: url('https://i.pinimg.com/originals/e8/1f/21/e81f21e94c1cb1652bf6437baa8c2f68.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            background-color: rgba(255, 255, 255, 0.9); /* Membuat sedikit transparan */
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
-            width: 100%;
-            text-align: center;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-            font-size: 3.2em;
-            margin-bottom: 20px;
-            font-style: italic;
-            font-weight: bold;
-        }
-        .by-line {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.2em;
-            font-weight: 600;
-            color: #555;
-            margin-bottom: 5px;
-        }
-        .by-line span {
-            font-weight: normal;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <!-- Nama store -->
-        <h1>Old-World Adornments</h1>
+{% block content %}
+<div class="container">
+    <!-- Store name -->
+    <h1>Old-World Adornments</h1>
 
-        <!-- By: Name - Class -->
-        <p class="by-line">By <span>{{ name }} - {{ class }}</span></p>
-    </div>
-</body>
-</html>
+    <!-- By: Name - Class -->
+    <p class="by-line">By <span>{{ name }} - {{ class }}</span></p>
 
+    <!-- Display adornments entries or message if none -->
+    {% if not adornments_entries %}
+    <p>Sorry, there are currently no jewelry for sale.</p>
+    {% else %}
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Size</th>
+            <th>Color</th>
+            <th>Quantity</th>
+        </tr>
+        {% for adornments_entry in adornments_entries %}
+        <tr>
+            <td>{{ adornments_entry.name }}</td>
+            <td>{{ adornments_entry.price }}</td>
+            <td>{{ adornments_entry.description }}</td>
+            <td>{{ adornments_entry.size }}</td>
+            <td>{{ adornments_entry.color }}</td>
+            <td>{{ adornments_entry.quantity }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    <br />
+
+    <!-- Add new adornments entry button -->
+    <a href="{% url 'main:create_adornments_entry' %}">
+    <button>Add New Adornments Entry</button>
+    </a>
+</div>
+{% endblock content %}
