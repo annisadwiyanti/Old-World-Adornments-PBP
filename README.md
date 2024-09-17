@@ -136,10 +136,10 @@ Terakhir, saya melakukan testing secara berkala untuk memastikan bahwa semua lan
 
 ### SCREENSHOTS POSTMAN
 **POSTMAN XML**
-![Request Get XML](XML.jpeg)
+![Request Get XML](postman/XML.jpeg)
 **POSTMAN json**
-![Request Get json](json.jpeg)
+![Request Get json](postman/json.jpeg)
 **POSTMAN XML by ID**
-![Request Get XML by ID](XMLbyID.jpeg)
+![Request Get XML by ID](postman/XMLbyID.jpeg)
 **POSTMAN json by ID**
-![Request Get json by ID](jsonbyID.jpeg)
+![Request Get json by ID](postman/jsonbyID.jpeg)
