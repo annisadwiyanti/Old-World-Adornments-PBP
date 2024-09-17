@@ -95,12 +95,10 @@ Data delivery penting dalam pengimplementasian sebuah platform karena memungkink
 
 ### 2. Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
 Kedua format, XML dan JSON, memiliki kelebihan dan kekurangannya masing-masing,
-***XML:**
-- Kelebihan: Mendukung skema yang kompleks, validasi data, dan namespace.
-- Kekurangan: Lebih verbose, lebih sulit dibaca manusia, dan parsing yang lebih lambat.
-**JSON:**
-- Kelebihan: Lebih ringan, lebih mudah dibaca manusia, dan parsing yang lebih cepat.
-- Kekurangan: Kurang mendukung skema yang kompleks dan validasi data.
+- Kelebihan XML: Mendukung skema yang kompleks, validasi data, dan namespace.
+- Kekurangan XML: Lebih verbose, lebih sulit dibaca manusia, dan parsing yang lebih lambat.
+- Kelebihan JSON: Lebih ringan, lebih mudah dibaca manusia, dan parsing yang lebih cepat.
+- Kekurangan JSON: Kurang mendukung skema yang kompleks dan validasi data.
 
 JSON dianggap lebih baik dibandingkan XML karena kesederhanaannya dan efisiensinya dalam pengiriman data, terutama dalam aplikasi web dan API. JSON lebih mudah dibaca dan ditulis oleh manusia, serta lebih cepat diproses oleh mesin, menjadikannya pilihan yang lebih praktis dalam aplikasi web.
 
