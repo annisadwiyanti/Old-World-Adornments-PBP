@@ -62,14 +62,14 @@
     }
     button {
         padding: 10px 20px;
-        background-color: #4CAF50;
+        background-color: #153b17;
         color: white;
         border: none;
         border-radius: 5px;
         cursor: pointer;
     }
     button:hover {
-        background-color: #45a049;
+        background-color: #153b1717;
     }
 </style>
 {% endblock meta %}
@@ -80,7 +80,9 @@
     <h1>Old-World Adornments</h1>
 
     <!-- By: Name - Class -->
-    <p class="by-line">By <span>{{ name }} - {{ class }}</span></p>
+    <p class="by-line">By <span>Annisa Dwiyanti Ismael - {{ class }}</span></p>
+    <!-- user logged in-->
+    <p class="by-line">Current user: <span>{{ name }}</span></p>
 
     <!-- Display adornments entries or message if none -->
     {% if not adornments_entries %}

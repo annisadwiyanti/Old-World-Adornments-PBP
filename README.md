@@ -143,3 +143,66 @@ Terakhir, saya melakukan testing secara berkala untuk memastikan bahwa semua lan
 ![Request Get XML by ID](postman/XMLbyID.jpeg)
 **POSTMAN json by ID**
 ![Request Get json by ID](postman/jsonbyID.jpeg)
+
+
+## Tugas 3
+### 1. Apa perbedaan antara HttpResponseRedirect() dan redirect()
+1. **HttpResponseRedirect()**
+   - `HttpResponseRedirect()` adalah subclass dari `HttpResponse` yang mengembalikan respons redirect ke klien. Digunakan untuk mengarahkan pengguna ke URL tertentu dengan mengembalikan objek `HttpResponse` yang berisi status kode HTTP 302.
+2. **redirect()**
+   - `redirect()` adalah shortcut function yang lebih fleksibel dan digunakan untuk mempermudah proses pengalihan. Shortcut ini mempermudah proses pengalihan tanpa harus secara manual menentukan URL, terutama jika Anda menggunakan nama view atau objek.
+
+### 2. Jelaskan cara kerja penghubungan model Product dengan User!
+Model Product dengan User dihubungkan dengan menggunakan `ForeignKey`.
+   ```
+      class AdornmentsEntry(models.Model):
+         user = models.ForeignKey(User, on_delete=models.CASCADE)
+         id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+         name = models.CharField(max_length=255)
+         price = models.IntegerField()
+         description = models.TextField()
+         size = models.CharField(max_length=100)
+         color = models.CharField(max_length=100)
+         quantity = models.IntegerField()
+   ```
+`ForeignKey` menghubungkan entri AdornmentsEntry (model Product) dengan satu pengguna (User), dengan satu pengguna dapat memiliki banyak entri. `on_delete=models.CASCADE:` jika user dihapus, maka semua entri terkait juga dihapus.
+
+### 3. Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
+1. **Authentication**
+   - Authetication adalah proses verifikasi identitas pengguna. Contohnya, ketika memasukkan username dan password untuk login.
+   - Saat pengguna login, sistem memeriksa kredensial (seperti username dan password) terhadap data yang tersimpan. Jika cocok, pengguna dianggap terautentikasi.
+2. **Athorization**
+   - Authorization adalah proses menentukan hak akses pengguna yang telah terautentikasi. Ini menentukan apa yang boleh dan tidak boleh dilakukan oleh pengguna.
+   - Saat pengguna login dan telah terautentikasi, sistem memeriksa izin yang terkait dengan pengguna tersebut untuk menentukan akses yang diizinkan.
+Django mengimplementasikan kedua konsep tersebut dengan:
+   - Authentication: Django menggunakan model `User` yang disediakan oleh `django.contrib.auth`. Pengguna dapat dibuat dan dikelola menggunakan model ini, seperti login, logout, dan verifikasi pengguna.
+   - Authorization: Django menggunakan model berbasis permissions dan groups untuk mengelola otorisasi. Permissions dapat ditetapkan dan mengontrol apa yang bisa diakses oleh user.
+
+### 4. Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
+Django mengingat pengguna yang telah login dengan menggunakan session dan cookies. Ketika pengguna login, Django membuat session untuk pengguna tersebut dan menyimpan session ID dalam cookie di browser pengguna. Session ID adalah identifikasi unik dan acak yang digunakan untuk mengasosiasikan pengguna dengan data sesi mereka.
+**Kegunaan lain cookies**
+Kegunaan lain dari cookies adalah untuk menyimpan preferensi pengguna (personalisasi), melacak aktivitas pengguna (tracking), dan meningkatkan keamanan seperti mengingat pengguna yang telah login atau mengaktifkan fitur keamanan tambahan (security).
+**Keamanan cookies**
+Tidak semua cookies aman digunakan. Cookies dapat digunakan untuk mencuri informasi pengguna atau melakukan serangan cyber. Oleh karena itu, penting untuk menggunakan cookies dengan bijak dan mengikuti praktik keamanan yang baik, seperti hanya dikirim melalui HTTPS (Secure Cookies), tidak dapat diakses melalui JavaScript (HttpOnly Cookies), membatasi pengiriman cookies ke situs yang sama untuk mencegah CSRF (SameSite Cookies), dan mengenskripsi informasi sensitif (Enkripsi).
+
+
+### 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+1. **Membuat form registrasi**
+   - Pada `views.py` tambahkan `UserCreationForm` dan `messages`, lalu buat fungsi `register`.
+   - Membuat file HTML untuk menampilkan form registrasi `register.html`, lalu tambahkan routing path register di `urls.py`.
+2. **Membuat login**
+   - Pada `views.py` tambahkan `authenticate`, `login`, dan `AuthenticationForm`, kemudian buat fungsi `login_user`.
+   - Membuat form HTML untuk login dan link ke halaman registrasi `login.html`, lalu tambahkan routing path login di `urls.py`.
+3. **Membuat logout**
+   - Pada `views.py` tambahkan fungsi `logout_user`untuk menghapus sesi pengguna.
+   - Menambahkan tombol logout yang merujuk ke `logout_user`, lalu tambahkan routing path logout di `urls.py`.
+4. **Merestriksi akses halaman**
+   - Menambahkan  decorator `@login_required` di fungsi `show_main` untuk membatasi akses halaman main pada file `views.py`.
+5. **Menambahkan cookies `last_login`**
+   - Menambahkan `response.set_cookie('last_login')` untuk menyimpan waktu login terakhir pada fungsi `login_user` yang beradi di file `views.py`.
+   - Mengubah fungsi `logout_user` dengan menambahkan `response.delete_cookie('last_login')` untuk menghapus cookie setelah logout, lalu tambahkan elemen untuk menampilkan `last_login` dari cookie di `main.html`.
+6. **Menghubungkan model `AdornmentsEntry` dengan `User`**
+   - Menambahkan `field user = models.ForeignKey(User)` di `AdornmentsEntry` yang berada pada file `models.py`.
+   - Di file `views.py`, pada create_adornments_entry, tetapkan `adornments_entry.user = request.user`. dan di `show_main`, filter adornments entries dengan `AdornmentsEntry.objects.filter(user=request.user)`.
+   - Jalankan migrasi dengan menggunakan `python manage.py makemigrations` dan `python manage.py migrate`.
+   - Lalu, update `settings.py` untuk mengatur variabel `DEBUG` sesuai environment `(PRODUCTION = os.getenv("PRODUCTION", False))`.
