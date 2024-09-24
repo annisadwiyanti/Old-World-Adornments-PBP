@@ -89,7 +89,7 @@ Karena berfungsi sebagai jembatan antara database relasional dan objek dalam kod
 - **Operasi CRUD:** ORM memudahkan operasi Create, Read, Update, dan Delete (CRUD) pada database. Pengembang dapat melakukan operasi ini dengan metode Python yang sederhana tanpa perlu menulis query SQL yang kompleks.
 
 
-## Tugas 4
+## Tugas 3
 ### 1. Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
 Data delivery penting dalam pengimplementasian sebuah platform karena memungkinkan transfer data atau komunikasi anatara server dan klien ataupun antara berbagai komponen sistem, aplikasi, atau layanan. Ini memastikan bahwa data yang dibutuhkan tersedia di tempat yang tepat dan waktu yang tepat, memungkinkan integrasi yang lancar dan operasional yang efisien. Tanpa data delivery yang efektif, platform mungkin mengalami keterlambatan, kehilangan data, atau ketidakcocokan data, yang dapat menghambat fungsionalitas dan kinerja keseluruhan.
 
@@ -145,7 +145,7 @@ Terakhir, saya melakukan testing secara berkala untuk memastikan bahwa semua lan
 ![Request Get json by ID](postman/jsonbyID.jpeg)
 
 
-## Tugas 3
+## Tugas 4
 ### 1. Apa perbedaan antara HttpResponseRedirect() dan redirect()
 1. **HttpResponseRedirect()**
    - `HttpResponseRedirect()` adalah subclass dari `HttpResponse` yang mengembalikan respons redirect ke klien. Digunakan untuk mengarahkan pengguna ke URL tertentu dengan mengembalikan objek `HttpResponse` yang berisi status kode HTTP 302.
