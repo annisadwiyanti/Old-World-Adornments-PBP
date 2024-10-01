@@ -1,0 +1,72 @@
+{% load static %}
+<nav class="bg-[#F9F7F1] shadow-lg w-full py-6">
+  <!-- Logo di bagian tengah (ukurannya diperbesar) -->
+  <div class="flex justify-center">
+    <img src="{% static 'images/logo.png' %}" alt="Logo" class="h-24 w-auto"> <!-- Logo diperbesar -->
+  </div>
+
+  <!-- Menu di bawah logo untuk desktop -->
+  <div class="hidden md:flex justify-center mt-4 space-x-8 text-lg">
+    <a href="{% url 'main:show_main' %}" class="text-[#7F7364] hover:text-[#D1AEA4] font-normal">
+      HOME
+    </a>
+    <a href="{% url 'main:collections' %}" class="text-[#7F7364] hover:text-[#D1AEA4] font-normal">
+      COLLECTIONS
+    </a>
+    <a href="{% url 'main:products' %}" class="text-[#7F7364] hover:text-[#D1AEA4] font-normal">
+      PRODUCTS
+    </a>
+    {% if user.is_authenticated %}
+      <span class="text-[#A0825B] font-normal">WELCOME, {{ user.username }}</span>
+      <a href="{% url 'main:logout' %}" class="bg-[#A0825B] hover:bg-[#B09A87] text-white font-normal py-1.5 px-3 rounded transition-all duration-300 ease-in-out ml-4 mt-[4px] text-sm">
+        LOGOUT
+      </a>
+    {% else %}
+      <a href="{% url 'main:login' %}" class="text-center bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded transition-all duration-300 ease-in-out">
+        LOGIN
+      </a>
+    {% endif %}
+  </div>
+
+  <!-- Mobile Menu Button (burger) -->
+  <div class="md:hidden flex justify-center mt-4">
+    <button class="mobile-menu-button">
+      <svg class="w-8 h-8 text-[#7F7364]" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+        <path d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Menu di bawah logo untuk mobile (hidden by default) -->
+  <div class="mobile-menu hidden md:hidden mt-4 flex flex-col items-center space-y-4 text-lg">
+    <a href="{% url 'main:show_main' %}" class="text-[#7F7364] hover:text-[#D1AEA4] font-normal">
+      Home
+    </a>
+    <a href="{% url 'main:collections' %}" class="text-[#7F7364] hover:text-[#D1AEA4] font-normal">
+      Collections
+    </a>
+    <a href="{% url 'main:products' %}" class="text-[#7F7364] hover:text-[#D1AEA4] font-normal">
+      Products
+    </a>
+    {% if user.is_authenticated %}
+      <span class="text-[#14414f] font-normal">Welcome, {{ user.username }}</span>
+      <a href="{% url 'main:logout' %}" class="bg-[#D1AEA4] hover:bg-[#B09A87] text-white font-normal py-1.5 px-3 rounded transition-all duration-300 ease-in-out text-sm mt-[-5px]">
+        LOGOUT
+      </a>
+    {% else %}
+      <a href="{% url 'main:login' %}" class="text-center bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded transition-all duration-300 ease-in-out">
+        LOGIN
+      </a>
+    {% endif %}
+  </div>
+</nav>
+
+<!-- Script for mobile menu toggle -->
+<script>
+  const btn = document.querySelector(".mobile-menu-button");
+  const menu = document.querySelector(".mobile-menu");
+
+  btn.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+  });
+</script>

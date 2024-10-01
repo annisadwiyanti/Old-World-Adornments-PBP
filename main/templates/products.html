@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="relative min-h-screen flex items-start justify-center py-8 px-4 sm:px-6 lg:px-8" style="background-image: url({% static 'images/background3.png' %}); background-size: cover; background-position: center;">
+
+  <!-- Overlay transparan -->
+  <div class="absolute inset-0" style="background-color: rgba(233, 216, 197, 0.5);"></div>
+
+  <!-- Container utama -->
+  <div class="relative z-10 bg-white bg-opacity-90 p-8 rounded-lg shadow-lg max-w-5xl w-full mt-8" style="font-family: 'Montserrat', sans-serif;">
+    <h1 class="text-3xl font-bold text-center mb-6 text-black">PRODUCTS</h1>
+
+    {% if adornments_entries %}
+    <!-- Menampilkan daftar produk dalam bentuk card -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {% for adornments_entry in adornments_entries %}
+        {% include 'cart_card.html' with adornments_entry=adornments_entry %}
+      {% endfor %}
+    </div>
+    {% else %}
+    <!-- Jika tidak ada produk yang terdaftar -->
+    <div class="flex flex-col items-center">
+      <img src="{% static 'images/emptycart.png' %}" alt="No products" class="w-64 h-64 mb-4">
+      <p class="text-center text-gray-600 text-xl">NO PRODUCTS AVAILABLE AT THE MOMENT</p>
+    </div>
+    {% endif %}
+
+    <!-- Tombol untuk menambah produk baru -->
+    <div class="flex justify-center mt-8">
+      <a href="{% url 'main:create_adornments_entry' %}" class="bg-[#d1aea4] text-white py-2 px-6 rounded hover:bg-[#0F1A13] transition duration-300" style="font-family: 'Montserrat', sans-serif;">
+        ADD NEW ADORNMENTS
+      </a>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

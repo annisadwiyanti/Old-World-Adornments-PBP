@@ -3,14 +3,16 @@ from main.views import show_main, create_adornments_entry, show_xml, show_json, 
 from main.views import register
 from main.views import login_user
 from main.views import logout_user
-
+from main.views import edit_adornments
+from main.views import delete_adornments
+from . import views
 
 
 app_name = 'main'
 
 urlpatterns = [
     path('', show_main, name='show_main'),
-    path('create-adornments-entry', create_adornments_entry, name='create_adornments_entry'),
+    path('create-adornments-entry/', create_adornments_entry, name='create_adornments_entry'),
     path('xml/', show_xml, name='show_xml'),
     path('json/', show_json, name='show_json'),
     path('xml/<str:id>/', show_xml_by_id, name='show_xml_by_id'),
@@ -18,4 +20,9 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('login/', login_user, name='login'),
     path('logout/', logout_user, name='logout'),
+    path('edit-adornments/<uuid:id>', edit_adornments, name='edit_adornments'),
+    path('delete/<uuid:id>', delete_adornments, name='delete_adornments'),
+    path('products/', views.products, name='products'),
+    path('collections/', views.collections, name='collections'),
+
 ]

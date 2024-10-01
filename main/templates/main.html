@@ -1,123 +1,35 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block meta %}
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Old-World Adornments</title>
-<style>
-    body {
-        font-family: 'Times New Roman', serif;
-        background-image: url('https://i.pinimg.com/originals/e8/1f/21/e81f21e94c1cb1652bf6437baa8c2f68.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-    .container {
-        background-color: rgba(255, 255, 255, 0.9); /* Slight transparency */
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        max-width: 800px;
-        width: 100%;
-        text-align: center;
-    }
-    h1 {
-        color: #333;
-        font-size: 3.2em;
-        margin-bottom: 20px;
-        font-style: italic;
-        font-weight: bold;
-    }
-    .by-line {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 1.2em;
-        font-weight: 600;
-        color: #555;
-        margin-bottom: 5px;
-    }
-    .by-line span {
-        font-weight: normal;
-    }
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 20px 0;
-    }
-    table, th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
-    }
-    th {
-        background-color: #f2f2f2;
-        color: #333;
-    }
-    td {
-        text-align: center;
-    }
-    button {
-        padding: 10px 20px;
-        background-color: #153b17;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    button:hover {
-        background-color: #153b1717;
-    }
-</style>
+<title>Dashboard</title>
 {% endblock meta %}
 
 {% block content %}
-<div class="container">
-    <!-- Store name -->
-    <h1>Old-World Adornments</h1>
+{% include 'navbar.html' %}
 
-    <!-- By: Name - Class -->
-    <p class="by-line">By <span>Annisa Dwiyanti Ismael - {{ class }}</span></p>
-    <!-- user logged in-->
-    <p class="by-line">Current user: <span>{{ name }}</span></p>
+<!-- Bagian dengan background gambar -->
+<div class="relative min-h-screen flex items-start justify-center py-12 px-4 sm:px-6 lg:px-8" style="background-image: url('{% static 'images/background.png' %}'); background-size: cover; background-position: center;">
 
-    <!-- Display adornments entries or message if none -->
-    {% if not adornments_entries %}
-    <p>Sorry, there are currently no jewelry for sale.</p>
-    {% else %}
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Description</th>
-            <th>Size</th>
-            <th>Color</th>
-            <th>Quantity</th>
-        </tr>
-        {% for adornments_entry in adornments_entries %}
-        <tr>
-            <td>{{ adornments_entry.name }}</td>
-            <td>{{ adornments_entry.price }}</td>
-            <td>{{ adornments_entry.description }}</td>
-            <td>{{ adornments_entry.size }}</td>
-            <td>{{ adornments_entry.color }}</td>
-            <td>{{ adornments_entry.quantity }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    {% endif %}
-    <br />
+  <!-- Overlay transparan -->
+  <div class="absolute inset-0" style="background-color: rgba(233, 216, 197, 0.5);"></div>
 
-    <!-- Add new adornments entry button -->
-    <a href="{% url 'main:create_adornments_entry' %}">
-    <button>Add New Adornments Entry</button>
+  <!-- Konten utama, di bagian atas halaman -->
+  <div class="relative z-10 bg-white bg-opacity-90 p-8 rounded-lg shadow-lg w-[80%] lg:w-[60%] text-left mt-24" style="font-family: 'Montserrat', sans-serif;"> <!-- Lebar container diperkecil menjadi w-[80%] dan w-[60%] -->
+    <h1 class="text-4xl font-bold text-black mb-4 text-left">WELCOME,</h1>
+    
+    <!-- Container untuk informasi -->
+    <div class="space-y-4 mb-6">
+        <p class="text-lg"><strong>NAME:</strong> {{ name }}</p>
+        <p class="text-lg"><strong>NPM:</strong> {{ npm }}</p>
+        <p class="text-lg"><strong>CLASS:</strong> {{ class }}</p>
+        <p class="text-lg"><strong>LAST LOGIN:</strong> {{ last_login }}</p>
+    </div>
+
+    <!-- Tombol GO TO PRODUCTS -->
+    <a href="{% url 'main:products' %}" class="bg-[#D1AEA4] text-white py-3 w-full block text-center rounded hover:bg-[#0F1A13] transition duration-300" style="font-family: 'Montserrat', sans-serif;">
+      GO TO PRODUCTS
     </a>
-    <a href="{% url 'main:logout' %}">
-        <button>Logout</button>
-      </a>
-      <h5>Sesi terakhir login: {{ last_login }}</h5>
+  </div>
+
 </div>
-{% endblock content %}
+{% endblock %}

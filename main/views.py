@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.core import serializers
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from main.forms import AdornmentsEntryForm
 from main.models import AdornmentsEntry
 from django.contrib import messages
@@ -22,7 +22,7 @@ def show_main(request):
         'class': 'PBP B',
         'npm': '2306240111',
         'adornments_entries': adornments_entries,
-        'last_login': request.COOKIES['last_login'],
+        'last_login': request.COOKIES.get('last_login', 'Never logged in')  # Menggunakan .get() dengan nilai default
     }
 
     return render(request, "main.html", context)
@@ -87,3 +87,35 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
+
+def edit_adornments(request, id):
+    # Get adornments entry berdasarkan id
+    adornments = AdornmentsEntry.objects.get(pk = id)
+
+    # Set adornments entry sebagai instance dari form
+    form = AdornmentsEntryForm(request.POST or None, instance=adornments)
+
+    if form.is_valid() and request.method == "POST":
+        # Simpan form dan kembali ke halaman awal
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "edit_adornments.html", context)
+
+def delete_adornments(request, id):
+    # Get adornments berdasarkan id
+    adornments = AdornmentsEntry.objects.get(pk = id)
+    # Hapus adornments
+    adornments.delete()
+    # Kembali ke halaman awal
+    return HttpResponseRedirect(reverse('main:show_main'))
+
+def products(request):
+    # Mengambil data produk untuk menampilkan card
+    adornments_entries = AdornmentsEntry.objects.all()
+    return render(request, 'products.html', {'adornments_entries': adornments_entries})
+
+def collections(request):
+    # Tampilkan tiga container pada halaman collections
+    return render(request, 'collections.html')

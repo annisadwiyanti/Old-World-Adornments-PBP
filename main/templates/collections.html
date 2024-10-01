@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block meta %}
+<title>Collections</title>
+{% endblock meta %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<!-- Bagian dengan background putih -->
+<div class="relative min-h-screen flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white">
+
+  <!-- Grid untuk tiga koleksi pertama -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl mb-8">
+
+    <!-- Collection 1 -->
+    <div class="relative h-96 rounded-lg shadow-lg bg-no-repeat bg-cover bg-center" style="background-image: url('{% static 'images/collection1.jpg' %}')">
+      <div class="absolute bottom-0 left-0 bg-black bg-opacity-50 p-4 w-full">
+        <h2 class="text-2xl font-bold text-white">WATCHES</h2>
+      </div>
+    </div>
+
+    <!-- Collection 2 -->
+    <div class="relative h-96 rounded-lg shadow-lg bg-no-repeat bg-cover bg-center" style="background-image: url('{% static 'images/collection2.jpg' %}')">
+      <div class="absolute bottom-0 left-0 bg-black bg-opacity-50 p-4 w-full">
+        <h2 class="text-2xl font-bold text-white">NECKLACE</h2>
+      </div>
+    </div>
+
+    <!-- Collection 3 -->
+    <div class="relative h-96 rounded-lg shadow-lg bg-no-repeat bg-cover bg-center" style="background-image: url('{% static 'images/collection3.jpg' %}')">
+      <div class="absolute bottom-0 left-0 bg-black bg-opacity-50 p-4 w-full">
+        <h2 class="text-2xl font-bold text-white">EARRINGS</h2>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Grid untuk dua koleksi di bagian bawah dengan teks yang di-justify tengah -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl justify-center">
+
+    <!-- Collection 4 -->
+    <div class="relative h-96 rounded-lg shadow-lg bg-no-repeat bg-cover bg-center" style="background-image: url('{% static 'images/collection4.jpg' %}')">
+      <div class="absolute bottom-0 left-0 bg-black bg-opacity-50 p-4 w-full">
+        <h2 class="text-2xl font-bold text-white">BRACELET</h2>
+      </div>
+    </div>
+
+    <!-- Collection 5 -->
+    <div class="relative h-96 rounded-lg shadow-lg bg-no-repeat bg-cover bg-center" style="background-image: url('{% static 'images/collection5.jpg' %}')">
+      <div class="absolute bottom-0 left-0 bg-black bg-opacity-50 p-4 w-full">
+        <h2 class="text-2xl font-bold text-white">RING</h2>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

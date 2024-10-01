@@ -1,0 +1,22 @@
+{% load static %}
+<div class="bg-white shadow-lg rounded-lg overflow-hidden">
+  <div class="px-4 py-5 sm:p-6">
+    <h3 class="text-lg leading-6 font-medium text-gray-900">{{ adornments_entry.name }}</h3>
+    <p class="mt-2 text-sm text-gray-500">{{ adornments_entry.description }}</p>
+    <ul class="mt-2 text-sm text-gray-600">
+      <li><strong>PRICE:</strong> {{ adornments_entry.price }}</li>
+      <li><strong>SIZE:</strong> {{ adornments_entry.size }}</li>
+      <li><strong>COLOR:</strong> {{ adornments_entry.color }}</li>
+      <li><strong>QUANTITY:</strong> {{ adornments_entry.quantity }}</li>
+    </ul>
+  </div>
+
+  <div class="px-4 py-4 sm:px-6 flex justify-end space-x-2 items-center">
+    <a href="{% url 'main:edit_adornments' adornments_entry.id %}">
+      <button class="bg-[#e0d7cc] text-black py-2 px-4 rounded hover:bg-[#8a6f50] transition duration-300">EDIT</button>
+    </a>
+    <a href="{% url 'main:delete_adornments' adornments_entry.id %}">
+      <button class="bg-[#821a11] text-white py-2 px-4 rounded hover:bg-[#6e140e] transition duration-300">DELETE</button>
+    </a>
+  </div>
+</div>

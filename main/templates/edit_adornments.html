@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block meta %}
-<title>ADD ADORNMENTS</title>
+<title>EDIT ADORNMENTS</title>
 {% endblock meta %}
 
 {% block content %}
@@ -15,7 +15,7 @@
 
   <!-- Form di tengah -->
   <div class="relative z-10 bg-white bg-opacity-90 p-8 rounded-lg shadow-lg max-w-lg w-full" style="font-family: 'Montserrat', sans-serif;">
-    <h1 class="text-3xl font-bold text-center mb-6 text-black">ADD ADORNMENTS</h1>
+    <h1 class="text-3xl font-bold text-center mb-6 text-black">EDIT ADORNMENTS</h1>
 
     <form method="POST" class="space-y-4">
       {% csrf_token %}
@@ -77,8 +77,8 @@
 
       <!-- Submit Button -->
       <div class="flex justify-center mt-4">
-        <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#D1AEA4] hover:bg-[#0F1A13] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D1AEA4]" style="font-family: 'Montserrat', sans-serif;">
-          ADD TO CART
+        <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#A0825B] hover:bg-[#0F1A13] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D1AEA4]" style="font-family: 'Montserrat', sans-serif;">
+          EDIT
         </button>
       </div>
     </form>
