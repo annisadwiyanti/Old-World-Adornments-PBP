@@ -241,12 +241,12 @@ Airbnb dan Dropbox
 Situs web lama, biasanya belum diperbarui untuk mendukung desain responsif, sehingga tampilannya tidak optimal di perangkat mobile
 
 ### 3. Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
-**Margin:**
-Ruang di luar elemen, digunakan untuk mengatur jarak antara elemen dengan elemen lainnya.
-**Border:**
-Garis yang mengelilingi elemen, dapat diatur ketebalan, warna, dan gaya garisnya.
-**Padding:**
-Ruang di dalam elemen, antara konten elemen dan border.
+- **Margin:**
+   Ruang di luar elemen, digunakan untuk mengatur jarak antara elemen dengan elemen lainnya.
+- **Border:**
+   Garis yang mengelilingi elemen, dapat diatur ketebalan, warna, dan gaya garisnya.
+- **Padding:**
+   Ruang di dalam elemen, antara konten elemen dan border.
 
 **Cara mengimplementasikan:**
 ```
@@ -258,10 +258,10 @@ Ruang di dalam elemen, antara konten elemen dan border.
 ```
 
 ### 4. Jelaskan konsep flex box dan grid layout beserta kegunaannya!
-**Flexbox:**
-`Flexbox` adalah layout satu dimensi yang digunakan untuk menyusun elemen secara fleksibel dalam satu baris atau kolom. Ini sangat berguna untuk membuat layout yang responsif, di mana elemen-elemen bisa disejajarkan, dipusatkan, atau didistribusikan dengan mudah. Flexbox memungkinkan pengaturan elemen secara otomatis menyesuaikan ruang yang tersedia tanpa harus mengatur ukuran secara manual.
-**Grid Layout:**
-`Grid Layout` adalah layout dua dimensi yang memungkinkan elemen diatur dalam baris dan kolom. Grid sangat berguna untuk layout yang lebih kompleks, karena memungkinkan kontrol penuh atas posisi elemen. Kita bisa menentukan ukuran kolom, baris, dan penempatan elemen secara spesifik untuk membuat layout yang terstruktur dan rapi.
+- **Flexbox:**
+   - `Flexbox` adalah layout satu dimensi yang digunakan untuk menyusun elemen secara fleksibel dalam satu baris atau kolom. Ini sangat berguna untuk membuat layout yang responsif, di mana elemen-elemen bisa disejajarkan, dipusatkan, atau didistribusikan dengan mudah. Flexbox memungkinkan pengaturan elemen secara otomatis menyesuaikan ruang yang tersedia tanpa harus mengatur ukuran secara manual.
+- **Grid Layout:**
+   - `Grid Layout` adalah layout dua dimensi yang memungkinkan elemen diatur dalam baris dan kolom. Grid sangat berguna untuk layout yang lebih kompleks, karena memungkinkan kontrol penuh atas posisi elemen. Kita bisa menentukan ukuran kolom, baris, dan penempatan elemen secara spesifik untuk membuat layout yang terstruktur dan rapi.
 
 ### 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
 Berikut adalah penjelasan yang disesuaikan dengan implementasi berdasarkan kode dan file yang kamu miliki:
