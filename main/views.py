@@ -117,5 +117,5 @@ def products(request):
     return render(request, 'products.html', {'adornments_entries': adornments_entries})
 
 def collections(request):
-    # Tampilkan tiga container pada halaman collections
+    # Tampilkan lima container pada halaman collections
     return render(request, 'collections.html')

@@ -3,7 +3,10 @@
 ### Akses aplikasi pada link berikut👇🏻
 [Old-World Adornments Website](http://annisa-dwiyanti-oldworldadornmentspbp.pbp.cs.ui.ac.id/)
 
-## Tugas 2
+### Datar Tugas👇🏻
+<details>
+<Summary><b>Tugas 2</b></Summary>
+
 ### 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 
 1. **Setup Environment:**
@@ -87,9 +90,11 @@ Karena berfungsi sebagai jembatan antara database relasional dan objek dalam kod
 - **Abstraksi Database:** ORM memungkinkan pengembang untuk berinteraksi dengan database menggunakan objek Python alih-alih menulis query SQL secara langsung, membuat kode lebih bersih dan mudah dipahami.
 - **Mapping Objek ke Tabel:** Dalam ORM, setiap model Django merepresentasikan tabel dalam database. Setiap atribut model merepresentasikan kolom dalam tabel tersebut. Dengan demikian, ORM memetakan objek Python ke tabel database relasional.
 - **Operasi CRUD:** ORM memudahkan operasi Create, Read, Update, dan Delete (CRUD) pada database. Pengembang dapat melakukan operasi ini dengan metode Python yang sederhana tanpa perlu menulis query SQL yang kompleks.
+</details>
 
+<details>
+<Summary><b>Tugas 3</b></Summary>
 
-## Tugas 3
 ### 1. Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
 Data delivery penting dalam pengimplementasian sebuah platform karena memungkinkan transfer data atau komunikasi anatara server dan klien ataupun antara berbagai komponen sistem, aplikasi, atau layanan. Ini memastikan bahwa data yang dibutuhkan tersedia di tempat yang tepat dan waktu yang tepat, memungkinkan integrasi yang lancar dan operasional yang efisien. Tanpa data delivery yang efektif, platform mungkin mengalami keterlambatan, kehilangan data, atau ketidakcocokan data, yang dapat menghambat fungsionalitas dan kinerja keseluruhan.
 
@@ -143,9 +148,11 @@ Terakhir, saya melakukan testing secara berkala untuk memastikan bahwa semua lan
 ![Request Get XML by ID](postman/XMLbyID.jpeg)
 **POSTMAN json by ID**
 ![Request Get json by ID](postman/jsonbyID.jpeg)
+</details>
 
+<details>
+<Summary><b>Tugas 4</b></Summary>
 
-## Tugas 4
 ### 1. Apa perbedaan antara HttpResponseRedirect() dan redirect()
 1. **HttpResponseRedirect()**
    - `HttpResponseRedirect()` adalah subclass dari `HttpResponse` yang mengembalikan respons redirect ke klien. Digunakan untuk mengarahkan pengguna ke URL tertentu dengan mengembalikan objek `HttpResponse` yang berisi status kode HTTP 302.
@@ -206,3 +213,82 @@ Tidak semua cookies aman digunakan. Cookies dapat digunakan untuk mencuri inform
    - Di file `views.py`, pada create_adornments_entry, tetapkan `adornments_entry.user = request.user`. dan di `show_main`, filter adornments entries dengan `AdornmentsEntry.objects.filter(user=request.user)`.
    - Jalankan migrasi dengan menggunakan `python manage.py makemigrations` dan `python manage.py migrate`.
    - Lalu, update `settings.py` untuk mengatur variabel `DEBUG` sesuai environment `(PRODUCTION = os.getenv("PRODUCTION", False))`.
+</details>
+
+<details>
+<Summary><b>Tugas 5</b></Summary>
+
+### 1. Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+Jika terdapat beberapa CSS selector untuk elemen yang sama, urutan prioritasnya adalah sebagai berikut:
+   - Inline Styles: Gaya yang diterapkan langsung pada elemen HTML menggunakan atribut style.
+   - ID Selectors: Selector yang menggunakan ID elemen, misalnya `#header`.
+   - Class, Attribute, dan Pseudo-class Selectors: Selector yang menggunakan kelas, atribut, atau pseudo-class, misalnya `.menu`, ``[type="text"], `:hover`.
+   - Type dan Pseudo-element Selectors: Selector yang menggunakan tipe elemen atau pseudo-element, misalnya `div`, `::before`.
+   - Important rules: `(!important)` akan mengesampingkan semua selector lain, terlepas dari urutan prioritas mereka.
+Jika dua selector memiliki tingkat prioritas yang sama, yang terakhir didefinisikan dalam CSS akan diterapkan.
+
+### 2. Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!
+Responsive design adalah pendekatan dalam pengembangan web yang memungkinkan tampilan situs web beradaptasi dengan berbagai ukuran layar dan perangkat, seperti desktop, tablet, dan ponsel. Hal ini penting karena pengguna mengakses situs web dari perangkat dengan resolusi yang berbeda, sehingga desain responsif memastikan tampilan yang optimal di setiap perangkat.
+
+**Mengapa ini penting:**
+   - Pengguna tidak perlu melakukan scrolling atau zooming untuk membaca konten pada layar yang lebih kecil.
+   - Meningkatkan pengalaman pengguna secara keseluruhan serta memperbaiki SEO, karena Google lebih memprioritaskan situs yang responsif.
+   - Mengurangi kebutuhan untuk membuat aplikasi terpisah untuk setiap perangkat.
+
+**Contoh aplikasi yang sudah menerapkan:**
+Airbnb dan Dropbox
+**Contoh aplikasi yang belum menerapkan:**
+Situs web lama, biasanya belum diperbarui untuk mendukung desain responsif, sehingga tampilannya tidak optimal di perangkat mobile
+
+### 3. Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+**Margin:**
+Ruang di luar elemen, digunakan untuk mengatur jarak antara elemen dengan elemen lainnya.
+**Border:**
+Garis yang mengelilingi elemen, dapat diatur ketebalan, warna, dan gaya garisnya.
+**Padding:**
+Ruang di dalam elemen, antara konten elemen dan border.
+
+**Cara mengimplementasikan:**
+```
+   .element {
+      margin: 10px; /* Mengatur jarak di luar elemen */
+      border: 2px solid black; /* Mengatur border elemen */
+      padding: 15px; /* Mengatur jarak di dalam elemen */
+   }
+```
+
+### 4. Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+**Flexbox:**
+`Flexbox` adalah layout satu dimensi yang digunakan untuk menyusun elemen secara fleksibel dalam satu baris atau kolom. Ini sangat berguna untuk membuat layout yang responsif, di mana elemen-elemen bisa disejajarkan, dipusatkan, atau didistribusikan dengan mudah. Flexbox memungkinkan pengaturan elemen secara otomatis menyesuaikan ruang yang tersedia tanpa harus mengatur ukuran secara manual.
+**Grid Layout:**
+`Grid Layout` adalah layout dua dimensi yang memungkinkan elemen diatur dalam baris dan kolom. Grid sangat berguna untuk layout yang lebih kompleks, karena memungkinkan kontrol penuh atas posisi elemen. Kita bisa menentukan ukuran kolom, baris, dan penempatan elemen secara spesifik untuk membuat layout yang terstruktur dan rapi.
+
+### 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+Berikut adalah penjelasan yang disesuaikan dengan implementasi berdasarkan kode dan file yang kamu miliki:
+
+1. **Mengatur Base Template:**
+   - Menambahkan tag `<meta name="viewport">` agar desain responsif di `base.html`.
+   - Menyambungkan Tailwind CSS dengan menambahkan tag `<script src="https://cdn.tailwindcss.com">` di bagian `<head>` untuk styling yang fleksibel.
+
+2. **Menerapkan Responsive Design:**
+   - Dengan Tailwind, gunakan class utility seperti `flex`, `grid`, dan `w-full` untuk memastikan layout responsif.
+   - Menggunakan media query bawaan Tailwind seperti `md:flex` dan `lg:grid` agar layout berubah berdasarkan ukuran layar. Misalnya, pada mobile, elemen-elemen ditampilkan secara vertikal, sementara pada desktop disusun dalam grid. Ini diterapkan pada navbar dan halaman produk.
+
+3. **Membuat Komponen Navbar:**
+   - Buat `navbar.html` dengan class Tailwind seperti `bg-[#F9F7F1]`, `shadow-lg`, dan `w-full` untuk membuat navbar yang sticky di bagian atas halaman.
+   - Menambahkan tombol mobile menu untuk memastikan navbar tampil baik di layar kecil dengan menambahkan script JavaScript sederhana untuk toggle menu mobile.
+   - Navbar juga memiliki kategori seperti `HOME`, `COLLECTIONS`, dan `PRODUCTS` yang mengarah ke halaman yang sesuai (`show_main`, `collections`, `products`).
+
+4. **Mengelola Komponen Produk (Product Card):**
+   - Buat file `product.html` untuk menampilkan daftar produk dalam bentuk grid menggunakan Tailwind class `grid grid-cols-3 gap-8`.
+   - Setiap produk memiliki styling menggunakan class Tailwind seperti `bg-white`, `shadow-lg`, dan `rounded-lg` untuk menampilkan produk dalam kartu.
+
+5. **Membuat Halaman Collections:**
+   - Di file `collections.html`, buat tiga container yang masing-masing menampilkan gambar dan deskripsi singkat koleksi produk. Menggunakan class `grid` untuk menata layout dalam bentuk grid responsif.
+
+6. **Implementasi Fitur CRUD:**
+   - Pada halaman `product.html`, fitur CRUD diimplementasikan dengan menambahkan tombol edit dan delete. Tombol ini menggunakan class Tailwind seperti `bg-yellow-500` untuk edit dan `bg-red-500` untuk delete. Tambahkan efek hover menggunakan `hover:bg-yellow-600` dan `transition duration-300`.
+
+7. **Testing dan Finishing:**
+   - Setelah semua komponen dan halaman selesai diimplementasikan, saya melakukan testing untuk memastikan tampilan responsif di semua perangkat. Penyesuaian dilakukan terutama pada padding, margin, dan transisi hover agar interaksi lebih halus.
+</details>
