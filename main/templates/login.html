@@ -7,72 +7,83 @@
 {% endblock meta %}
 
 {% block content %}
-<div class="min-h-screen flex">
-  
-  <!-- Bagian kiri untuk form login dengan background #efece7 -->
-  <div class="flex flex-col justify-center w-1/2 bg-[#efece7] p-16">
-    <div class="max-w-md w-full mx-auto space-y-8">
-      <div>
-        <!-- Menggunakan Montserrat untuk judul -->
-        <h2 class="text-center text-black text-3xl font-extrabold" style="font-family: 'Montserrat', sans-serif;">
-          LOGIN TO YOUR ACCOUNT
-        </h2>
-      </div>
-      <form class="mt-8 space-y-6" method="POST" action="">
-        {% csrf_token %}
-        <input type="hidden" name="remember" value="true">
-        <div class="rounded-md shadow-sm -space-y-px">
-          <div>
-            <label for="username" class="sr-only">USERNAME</label>
-            <input id="username" name="username" type="text" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-[#D1AEA4] focus:border-[#D1AEA4] focus:z-10 sm:text-sm" placeholder="Username" style="font-family: 'Montserrat', sans-serif;">
-          </div>
-          <div>
-            <label for="password" class="sr-only">PASSWORD</label>
-            <input id="password" name="password" type="password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-[#D1AEA4] focus:border-[#D1AEA4] focus:z-10 sm:text-sm" placeholder="Password" style="font-family: 'Montserrat', sans-serif;">
+<div class="h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8" style="background-image: url('https://i.pinimg.com/originals/41/6f/28/416f289d739743733bf704a7c40388a1.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center;">
+  <div class="max-w-md w-full bg-white p-8 shadow-lg rounded-lg space-y-8 bg-opacity-80">
+    <div>
+      <!-- Judul form login -->
+      <h2 class="mt-6 text-center text-3xl font-extrabold text-black uppercase" style="font-family: 'Montserrat', sans-serif;">
+        Login to your account
+      </h2>
+    </div>
+    
+    <!-- Form login -->
+    <form class="mt-8 space-y-6" method="POST" action="">
+      {% csrf_token %}
+      <input type="hidden" name="remember" value="true">
+      <div class="space-y-4">
+        <div>
+          <label for="username" class="block text-sm font-bold text-black mb-2 uppercase" style="font-family: 'Montserrat', sans-serif;">
+            USERNAME
+          </label>
+          <div class="relative">
+            <input 
+              id="username" 
+              name="username" 
+              type="text" 
+              required 
+              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-[#D1AEA4] focus:border-[#D1AEA4] sm:text-sm" 
+              placeholder="Enter your username" 
+              style="font-family: 'Montserrat', sans-serif;"
+            >
           </div>
         </div>
 
         <div>
-          <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#D1AEA4] hover:bg-[#0F1A13] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D1AEA4]" style="font-family: 'Montserrat', sans-serif;">
-            SIGN IN
-          </button>
+          <label for="password" class="block text-sm font-bold text-black mb-2 uppercase" style="font-family: 'Montserrat', sans-serif;">
+            PASSWORD
+          </label>
+          <div class="relative">
+            <input 
+              id="password" 
+              name="password" 
+              type="password" 
+              required 
+              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-[#D1AEA4] focus:border-[#D1AEA4] sm:text-sm" 
+              placeholder="Enter your password" 
+              style="font-family: 'Montserrat', sans-serif;"
+            >
+          </div>
         </div>
-      </form>
-
-      {% if messages %}
-      <div class="mt-4">
-        {% for message in messages %}
-        {% if message.tags == "success" %}
-              <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert" style="font-family: 'Montserrat', sans-serif;">
-                  <span class="block sm:inline">{{ message }}</span>
-              </div>
-          {% elif message.tags == "error" %}
-              <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert" style="font-family: 'Montserrat', sans-serif;">
-                  <span class="block sm:inline">{{ message }}</span>
-              </div>
-          {% else %}
-              <div class="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert" style="font-family: 'Montserrat', sans-serif;">
-                  <span class="block sm:inline">{{ message }}</span>
-              </div>
-          {% endif %}
-        {% endfor %}
       </div>
-      {% endif %}
 
-      <div class="text-center mt-4">
-        <p class="text-sm text-black font-sans" style="font-family: 'Montserrat', sans-serif;">
-          DON'T HAVE AN ACCOUNT YET?
-          <a href="{% url 'main:register' %}" class="font-medium hover:text-indigo-300" style="color: #d1aea4; font-family: 'Montserrat', sans-serif;">
-            REGISTER NOW
-          </a>        
-        </p>
+      <!-- Tombol Login -->
+      <div>
+        <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#D1AEA4] hover:bg-[#c0a295] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D1AEA4] uppercase" style="font-family: 'Montserrat', sans-serif;">
+          Sign in
+        </button>
       </div>
+    </form>
+
+    <!-- Menampilkan pesan jika ada -->
+    {% if messages %}
+    <div class="mt-4">
+      {% for message in messages %}
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert" style="font-family: 'Montserrat', sans-serif;">
+        <span class="block sm:inline">{{ message }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Link ke halaman register -->
+    <div class="text-center mt-4">
+      <p class="text-sm text-gray-600 uppercase" style="font-family: 'Montserrat', sans-serif;">
+        DON'T HAVE AN ACCOUNT
+        <a href="{% url 'main:register' %}" class="font-medium text-[#d1aea4] hover:text-[#c0a295]" style="font-family: 'Montserrat', sans-serif;">
+          REGISTER NOW
+        </a>
+      </p>
     </div>
   </div>
-
-  <!-- Bagian kanan untuk gambar -->
-  <div class="w-1/2 bg-cover bg-center" style="background-image: url('https://i.pinimg.com/originals/69/c2/e5/69c2e5cb44293b0004ec496a852dc390.jpg');">
-  </div>
-
 </div>
 {% endblock content %}

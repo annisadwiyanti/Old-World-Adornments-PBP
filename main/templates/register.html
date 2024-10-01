@@ -2,72 +2,87 @@
 
 {% block meta %}
 <title>Register</title>
-<!-- Link Google Font Montserrat -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
 {% endblock meta %}
 
 {% block content %}
-<div class="min-h-screen flex">
-  
-  <!-- Bagian kiri untuk form register -->
-  <div class="flex flex-col justify-center w-1/2 bg-[#efece7] p-16">
-    <div class="max-w-md w-full mx-auto space-y-8">
+<div class="h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8" style="background-image: url('https://i.pinimg.com/originals/41/6f/28/416f289d739743733bf704a7c40388a1.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center;">
+  <div class="max-w-md w-full bg-white p-8 shadow-lg rounded-lg space-y-8 bg-opacity-80">
+    <div>
+      <!-- Judul form registrasi -->
+      <h2 class="mt-6 text-center text-3xl font-extrabold text-black uppercase" style="font-family: 'Montserrat', sans-serif;">
+        Create your account
+      </h2>
+      <p class="text-center text-gray-500 uppercase" style="font-family: 'Montserrat', sans-serif;">Create your account</p>
+    </div>
+    
+    <!-- Form registrasi -->
+    <form class="mt-8 space-y-6" method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="remember" value="true">
+      <div class="space-y-4">
+        <!-- Loop untuk setiap field di form -->
+        {% for field in form %}
+          <div>
+            <label for="{{ field.id_for_label }}" class="block text-sm font-bold text-black mb-2 uppercase" style="font-family: 'Montserrat', sans-serif;">
+              {{ field.label }}
+            </label>
+            <div class="relative">
+              <input 
+                type="{{ field.field.widget.input_type }}" 
+                name="{{ field.name }}" 
+                id="{{ field.id_for_label }}" 
+                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-[#D1AEA4] focus:border-[#D1AEA4] sm:text-sm" 
+                placeholder="{{ field.field.widget.attrs.placeholder }}" 
+                value="{{ field.value|default_if_none:'' }}" 
+                {% if field.errors %} aria-invalid="true" {% endif %}
+              >
+              <!-- Menampilkan ikon jika ada error -->
+              {% if field.errors %}
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                  <svg class="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+              {% endif %}
+            </div>
+            <!-- Tampilkan pesan error jika ada -->
+            {% if field.errors %}
+              {% for error in field.errors %}
+                <p class="mt-1 text-sm text-red-600" style="font-family: 'Montserrat', sans-serif;">{{ error }}</p>
+              {% endfor %}
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Tombol Register -->
       <div>
-        <!-- Judul dan deskripsi -->
-        <h2 class="text-left text-black text-4xl font-extrabold" style="font-family: 'Montserrat', sans-serif;">
-          REGISTER
-        </h2>
-        <p class="text-left text-sm text-gray-500" style="font-family: 'Montserrat', sans-serif;">
-          CREATE YOUR ACCOUNT
-        </p>
+        <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#d1aea4] hover:bg-[#c0a295] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#d1aea4] uppercase" style="font-family: 'Montserrat', sans-serif;">
+          Create Account
+        </button>
       </div>
-      
-      <form method="POST" class="mt-8 space-y-6">
-        {% csrf_token %}
-        
-        <div class="space-y-4">
-          <!-- Username input -->
-          <div>
-            <label for="username" class="block text-sm font-bold text-black mb-1">USERNAME</label>
-            <input id="username" name="username" type="text" required class="block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-md focus:outline-none focus:ring-[#D1AEA4] focus:border-[#D1AEA4] sm:text-sm" placeholder="Enter your username">
-          </div>
+    </form>
 
-          <!-- Password input -->
-          <div>
-            <label for="password" class="block text-sm font-bold text-black mb-1">PASSWORD</label>
-            <input id="password" name="password" type="password" required class="block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-md focus:outline-none focus:ring-[#D1AEA4] focus:border-[#D1AEA4] sm:text-sm" placeholder="Enter 8 characters or more">
-          </div>
-
-          <!-- Confirm password input -->
-          <div>
-            <label for="confirm_password" class="block text-sm font-bold text-black mb-1">REPEAT PASSWORD</label>
-            <input id="confirm_password" name="confirm_password" type="password" required class="block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-md focus:outline-none focus:ring-[#D1AEA4] focus:border-[#D1AEA4] sm:text-sm" placeholder="Confirm your password">
-          </div>
-        </div>
-
-        <!-- Submit button -->
-        <div>
-          <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#D1AEA4] hover:bg-[#0F1A13] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D1AEA4]" style="font-family: 'Montserrat', sans-serif;">
-            CREATE ACCOUNT
-          </button>
-        </div>
-      </form>
-
-      <!-- Already have an account? LOGIN HERE -->
-      <div class="mt-6 text-center">
-        <p class="text-sm text-gray-600" style="font-family: 'Montserrat', sans-serif;">
-          ALREADY HAVE AN ACCOUNT?
-          <a href="{% url 'main:login' %}" class="text-[#D1AEA4] hover:text-[#b99f91]">
-            LOGIN HERE
-          </a>
-        </p>
+    <!-- Menampilkan pesan jika ada -->
+    {% if messages %}
+    <div class="mt-4">
+      {% for message in messages %}
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert" style="font-family: 'Montserrat', sans-serif;">
+        <span class="block sm:inline">{{ message }}</span>
       </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Link ke halaman login -->
+    <div class="text-center mt-4">
+      <p class="text-sm text-gray-600 uppercase" style="font-family: 'Montserrat', sans-serif;">
+        Already have an account?
+        <a href="{% url 'main:login' %}" class="font-medium text-[#d1aea4] hover:text-[#c0a295]" style="font-family: 'Montserrat', sans-serif;">
+          Login here
+        </a>
+      </p>
     </div>
   </div>
-
-  <!-- Bagian kanan untuk gambar -->
-  <div class="w-1/2 bg-cover bg-center" style="background-image: url('https://i.pinimg.com/originals/69/c2/e5/69c2e5cb44293b0004ec496a852dc390.jpg');">
-  </div>
-
 </div>
 {% endblock content %}
