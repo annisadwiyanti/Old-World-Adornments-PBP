@@ -11,17 +11,18 @@ from django.contrib.auth.decorators import login_required
 import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from django.utils.html import strip_tags
 
 # Create your views here.
 @login_required(login_url='/login')
 def show_main(request):
-    adornments_entries = AdornmentsEntry.objects.filter(user=request.user)
 
     context = {
         'name': request.user.username,
         'class': 'PBP B',
         'npm': '2306240111',
-        'adornments_entries': adornments_entries,
         'last_login': request.COOKIES.get('last_login', 'Never logged in')  # Menggunakan .get() dengan nilai default
     }
 
@@ -40,11 +41,11 @@ def create_adornments_entry(request):
     return render(request, "create_adornments_entry.html", context)
 
 def show_xml(request):
-    data = AdornmentsEntry.objects.all()
+    data = AdornmentsEntry.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
 def show_json(request):
-    data = AdornmentsEntry.objects.all()
+    data = AdornmentsEntry.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def show_xml_by_id(request, id):
@@ -77,6 +78,8 @@ def login_user(request):
         response = HttpResponseRedirect(reverse("main:show_main"))
         response.set_cookie('last_login', str(datetime.datetime.now()))
         return response
+      else:
+        messages.error(request, "Invalid username or password. Please try again.")
    else:
       form = AuthenticationForm(request)
    context = {'form': form}
@@ -119,3 +122,25 @@ def products(request):
 def collections(request):
     # Tampilkan lima container pada halaman collections
     return render(request, 'collections.html')
+
+@csrf_exempt
+@require_POST
+def add_adornments_entry_ajax(request):
+    name = strip_tags(request.POST.get("name"))
+    price = request.POST.get("price")
+    description = strip_tags(request.POST.get("description"))
+    size = strip_tags(request.POST.get("size"))
+    color = strip_tags(request.POST.get("color"))
+    quantity = request.POST.get("quantity")
+    user = request.user
+
+    new_adornments = AdornmentsEntry(
+        name=name, price=price,
+        description=description,
+        size=size, color=color,
+        quantity=quantity,
+        user=user
+    )
+    new_adornments.save()
+
+    return HttpResponse(b"CREATED", status=201)

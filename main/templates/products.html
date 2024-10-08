@@ -11,29 +11,179 @@
   <!-- Container utama -->
   <div class="relative z-10 bg-white bg-opacity-90 p-8 rounded-lg shadow-lg max-w-5xl w-full mt-8" style="font-family: 'Montserrat', sans-serif;">
     <h1 class="text-3xl font-bold text-center mb-6 text-black">PRODUCTS</h1>
+    <div id="adornments_entry_cards"></div>
+    <div id="crudModal" tabindex="-1" aria-hidden="true" class="hidden fixed inset-0 z-50 w-full flex items-center justify-center bg-gray-800 bg-opacity-50 overflow-x-hidden overflow-y-auto transition-opacity duration-300 ease-out">
+      <div id="crudModalContent" class="relative z-10 bg-white bg-opacity-90 p-8 rounded-lg shadow-lg max-w-lg w-full" style="font-family: 'Montserrat', sans-serif;">
+        <!-- Modal Header -->
+        <h1 class="text-3xl font-bold text-center mb-6 text-black">ADD ADORNMENTS</h1>
+        
+        <!-- Modal Body -->
+        <form id="adornmentsEntryForm" class="space-y-4">
+          <div class="flex flex-col">
+            <label for="name" class="block text-sm font-bold tracking-wide uppercase text-black mb-1">
+              NAME
+            </label>
+            <input type="text" id="name" name="name" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Enter adornments name" required>
+          </div>
 
-    {% if adornments_entries %}
-    <!-- Menampilkan daftar produk dalam bentuk card -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {% for adornments_entry in adornments_entries %}
-        {% include 'cart_card.html' with adornments_entry=adornments_entry %}
-      {% endfor %}
-    </div>
-    {% else %}
-    <!-- Jika tidak ada produk yang terdaftar -->
-    <div class="flex flex-col items-center">
-      <img src="{% static 'images/emptycart.png' %}" alt="No products" class="w-64 h-64 mb-4">
-      <p class="text-center text-gray-600 text-xl">NO PRODUCTS AVAILABLE AT THE MOMENT</p>
-    </div>
-    {% endif %}
+          <div class="flex flex-col">
+            <label for="description" class="block text-sm font-bold tracking-wide uppercase text-black mb-1">
+              DESCRIPTION
+            </label>
+            <textarea id="description" name="description" rows="3" class="mt-1 block w-full h-52 resize-none border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Enter description" required></textarea>
+          </div>
 
-    <!-- Tombol untuk menambah produk baru -->
-    <div class="flex justify-center mt-8">
-      <a href="{% url 'main:create_adornments_entry' %}" class="bg-[#d1aea4] text-white py-2 px-6 rounded hover:bg-[#0F1A13] transition duration-300" style="font-family: 'Montserrat', sans-serif;">
-        ADD NEW ADORNMENTS
-      </a>
+          <div class="flex flex-col">
+            <label for="price" class="block text-sm font-bold tracking-wide uppercase text-black mb-1">
+              PRICE
+            </label>
+            <input type="number" id="price" name="price" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Enter price" required>
+          </div>
+
+          <div class="flex flex-col">
+            <label for="size" class="block text-sm font-bold tracking-wide uppercase text-black mb-1">
+              SIZE
+            </label>
+            <input type="text" id="size" name="size" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Enter size" required>
+          </div>
+
+          <div class="flex flex-col">
+            <label for="color" class="block text-sm font-bold tracking-wide uppercase text-black mb-1">
+              COLOR
+            </label>
+            <input type="text" id="color" name="color" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Enter color" required>
+          </div>
+
+          <div class="flex flex-col">
+            <label for="quantity" class="block text-sm font-bold tracking-wide uppercase text-black mb-1">
+              QUANTITY
+            </label>
+            <input type="number" id="quantity" name="quantity" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Enter quantity" required>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="flex justify-center space-x-4 mt-4">
+            <!-- Button Back -->
+            <button type="button" class="group relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-[#D1AEA4]" onclick="hideModal();">
+              BACK
+            </button>
+            <!-- Button Add -->
+            <button type="submit" id="submitAdornmentsEntry" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#D1AEA4] hover:bg-[#0F1A13]">
+              ADD TO CART
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
+
+  <!-- Button for adding new adornments -->
+  <div class="flex justify-center mt-8 space-x-4">
+    <a href="{% url 'main:create_adornments_entry' %}" class="bg-[#d1aea4] text-white py-2 px-6 rounded hover:bg-[#0F1A13] transition duration-300">
+      ADD NEW ADORNMENTS
+    </a>
+    <button data-modal-target="crudModal" data-modal-toggle="crudModal" class="bg-[#d1aea4] text-white py-2 px-6 rounded hover:bg-[#0F1A13] transition duration-300" onclick="showModal();">
+      ADD NEW ADORNMENTS BY AJAX
+    </button>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script>
+  <script>
+    function addAdornmentsEntry() {
+      fetch("{% url 'main:add_adornments_entry_ajax' %}", {
+        method: "POST",
+        body: new FormData(document.querySelector('#adornmentsEntryForm')),
+      })
+      .then(response => refreshAdornmentsEntries())
 
-</div>
-{% endblock %}
+      document.getElementById("adornmentsEntryForm").reset(); 
+      document.querySelector("[data-modal-toggle='crudModal']").click();
+
+      return false;
+    }
+
+    async function getAdornmentsEntries(){
+      return fetch("{% url 'main:show_json' %}").then((res) => res.json());
+    }
+
+    async function refreshAdornmentsEntries() {
+      document.getElementById("adornments_entry_cards").innerHTML = "";
+      document.getElementById("adornments_entry_cards").className = "";
+      const adornmentsEntries = await getAdornmentsEntries();
+      let htmlString = "";
+      let classNameString = "";
+
+      if (adornmentsEntries.length === 0) {
+          classNameString = "flex flex-col items-center justify-center min-h-[24rem] p-6";
+          htmlString = `
+              <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
+                  <img src="{% static 'images/emptycart.png' %}" alt="No products" class="w-64 h-64 mb-4"/>
+                  <p class="text-center text-gray-600 text-xl">NO PRODUCTS AVAILABLE AT THE MOMENT</p>
+              </div>
+          `;
+      } else {
+          classNameString = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8";
+          adornmentsEntries.forEach((item) => {
+              const name = DOMPurify.sanitize(item.fields.name);
+              const description = DOMPurify.sanitize(item.fields.description);
+              const size = DOMPurify.sanitize(item.fields.size);
+              const color = DOMPurify.sanitize(item.fields.color);
+              htmlString += `
+              <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                  <div class="px-4 py-5 sm:p-6">
+                      <h3 class="text-lg leading-6 font-medium text-gray-900">${name}</h3>
+                      <p class="mt-2 text-sm text-gray-500">${description}</p>
+                      <ul class="mt-2 text-sm text-gray-600">
+                          <li><strong>PRICE:</strong> ${item.fields.price}</li>
+                          <li><strong>SIZE:</strong> ${size}</li>
+                          <li><strong>COLOR:</strong> ${color}</li>
+                          <li><strong>QUANTITY:</strong> ${item.fields.quantity}</li>
+                      </ul>
+                  </div>
+                  <div class="px-4 py-4 sm:px-6 flex justify-end space-x-2 items-center">
+                      <a href="/edit-adornments/${item.pk}">
+                          <button class="bg-[#e0d7cc] text-black py-2 px-4 rounded hover:bg-[#8a6f50] transition duration-300">EDIT</button>
+                      </a>
+                      <a href="/delete/${item.pk}">
+                          <button class="bg-[#821a11] text-white py-2 px-4 rounded hover:bg-[#6e140e] transition duration-300">DELETE</button>
+                      </a>
+                  </div>
+              </div>
+              `;
+          });
+      }
+      document.getElementById("adornments_entry_cards").className = classNameString;
+      document.getElementById("adornments_entry_cards").innerHTML = htmlString;
+    }
+
+    refreshAdornmentsEntries();
+    const modal = document.getElementById('crudModal');
+    const modalContent = document.getElementById('crudModalContent');
+
+    function showModal() {
+      const modal = document.getElementById('crudModal');
+      const modalContent = document.getElementById('crudModalContent');
+
+      modal.classList.remove('hidden'); 
+      setTimeout(() => {
+        modalContent.classList.remove('opacity-0', 'scale-95');
+        modalContent.classList.add('opacity-100', 'scale-100');
+      }, 50); 
+    }
+
+    function hideModal() {
+      const modal = document.getElementById('crudModal');
+      const modalContent = document.getElementById('crudModalContent');
+
+      modalContent.classList.remove('opacity-100', 'scale-100');
+      modalContent.classList.add('opacity-0', 'scale-95');
+
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 150); 
+    }
+    
+    document.getElementById("adornmentsEntryForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      addAdornmentsEntry();
+    });
+</script>
+{% endblock content %}

@@ -5,6 +5,7 @@ from main.views import login_user
 from main.views import logout_user
 from main.views import edit_adornments
 from main.views import delete_adornments
+from main.views import add_adornments_entry_ajax
 from . import views
 
 
@@ -21,8 +22,8 @@ urlpatterns = [
     path('login/', login_user, name='login'),
     path('logout/', logout_user, name='logout'),
     path('edit-adornments/<uuid:id>', edit_adornments, name='edit_adornments'),
-    path('delete/<uuid:id>', delete_adornments, name='delete_adornments'),
+    path('delete/<uuid:id>', views.delete_adornments, name='delete_adornments'),
     path('products/', views.products, name='products'),
     path('collections/', views.collections, name='collections'),
-
+    path('create-adornments-entry-ajax', add_adornments_entry_ajax, name='add_adornments_entry_ajax'),
 ]

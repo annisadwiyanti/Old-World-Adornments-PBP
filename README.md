@@ -292,3 +292,30 @@ Berikut adalah penjelasan yang disesuaikan dengan implementasi berdasarkan kode 
 7. **Testing dan Finishing:**
    - Setelah semua komponen dan halaman selesai diimplementasikan, saya melakukan testing untuk memastikan tampilan responsif di semua perangkat. Penyesuaian dilakukan terutama pada padding, margin, dan transisi hover agar interaksi lebih halus.
 </details>
+
+<details>
+<Summary><b>Tugas 6</b></Summary>
+
+### 1. Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!
+-  **Interaktivitas:** JavaScript memungkinkan pengembang untuk membuat situs web yang dinamis dan interaktif. Misalnya, fitur seperti animasi, validasi formulir, dan pembaruan konten tanpa perlu memuat ulang halaman.
+- **Pengembangan Frontend dan Backend:** Dengan adanya teknologi seperti Node.js, JavaScript dapat digunakan untuk pengembangan sisi server, selain dari sisi klien.
+- **Kompatibilitas Browser:** JavaScript didukung oleh hampir semua browser modern, membuatnya sangat universal dan mudah diakses oleh pengguna di berbagai platform.
+- **Pengembangan Aplikasi Mobile:** JavaScript juga dapat digunakan untuk mengembangkan aplikasi mobile melalui framework seperti React Native.
+- **Komunitas dan Ekosistem:** JavaScript memiliki komunitas yang besar dan aktif, serta banyak pustaka dan framework yang memudahkan pengembangan aplikasi web.
+
+### 2. Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
+`await` dalam JavaScript digunakan untuk menunggu penyelesaian Promise sebelum melanjutkan eksekusi kode berikutnya. Saat digunakan dengan `fetch()`, `await` memastikan bahwa permintaan HTTP selesai dan respons diterima sebelum melanjutkan ke langkah selanjutnya. 
+
+Tanpa `await`,  kode akan terus berjalan tanpa menunggu hasil dari `fetch()`, kode langsung dieksekusi dan bisa menghasilkan objek Promise alih-alih data, yang dapat menyebabkan error atau data yang belum lengkap karena proses pengambilan belum selesai.
+
+### 3. Mengapa kita perlu menggunakan decorator csrf_exempt pada view yang akan digunakan untuk AJAX POST?
+`csrf_exempt` digunakan untuk mengecualikan view dari pengecekan token CSRF (Cross-Site Request Forgery), memungkinkan permintaan AJAX POST tetap diproses tanpa memeriksa token CSRF. Ini berguna jika pengiriman token CSRF dalam AJAX rumit atau tidak diperlukan, terutama untuk endpoint yang hanya menerima data dari sumber terpercaya. Namun, penggunaannya harus hati-hati karena menghapus lapisan perlindungan penting, sehingga bisa membuka celah keamanan jika tidak diterapkan dengan benar.
+
+### 4. Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
+- **Keamanan Tidak Bisa Diandalkan di Frontend:** Pengguna yang berniat jahat dapat memanipulasi atau menonaktifkan validasi dan pembersihan di frontend dengan mudah menggunakan alat seperti developer tools atau aplikasi HTTP request manual. Jika hanya melakukan validasi di frontend, aplikasi akan rentan terhadap serangan seperti Cross-Site Scripting (XSS) atau SQL Injection karena data berbahaya masih bisa dikirim ke server.
+- **Validasi Backend Sebagai Lapisan Pertahanan Terakhir:** Validasi di backend adalah lapisan pertahanan terakhir sebelum data disimpan di basis data atau diproses lebih lanjut. Ini memastikan bahwa semua data yang diterima sudah benar-benar bersih dan aman, terlepas dari bagaimana data tersebut dikirim (misalnya, dari aplikasi web, aplikasi mobile, atau request manual).
+- **Konsistensi Pada Semua Sumber Data:** Jika aplikasi memiliki berbagai cara untuk menerima input (misalnya dari API, mobile app, atau web app), hanya validasi di backend yang dapat menjamin konsistensi pembersihan data dari semua sumber tersebut.
+
+### 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+
+</details>
