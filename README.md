@@ -312,10 +312,55 @@ Tanpa `await`,  kode akan terus berjalan tanpa menunggu hasil dari `fetch()`, ko
 `csrf_exempt` digunakan untuk mengecualikan view dari pengecekan token CSRF (Cross-Site Request Forgery), memungkinkan permintaan AJAX POST tetap diproses tanpa memeriksa token CSRF. Ini berguna jika pengiriman token CSRF dalam AJAX rumit atau tidak diperlukan, terutama untuk endpoint yang hanya menerima data dari sumber terpercaya. Namun, penggunaannya harus hati-hati karena menghapus lapisan perlindungan penting, sehingga bisa membuka celah keamanan jika tidak diterapkan dengan benar.
 
 ### 4. Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
-- **Keamanan Tidak Bisa Diandalkan di Frontend:** Pengguna yang berniat jahat dapat memanipulasi atau menonaktifkan validasi dan pembersihan di frontend dengan mudah menggunakan alat seperti developer tools atau aplikasi HTTP request manual. Jika hanya melakukan validasi di frontend, aplikasi akan rentan terhadap serangan seperti Cross-Site Scripting (XSS) atau SQL Injection karena data berbahaya masih bisa dikirim ke server.
-- **Validasi Backend Sebagai Lapisan Pertahanan Terakhir:** Validasi di backend adalah lapisan pertahanan terakhir sebelum data disimpan di basis data atau diproses lebih lanjut. Ini memastikan bahwa semua data yang diterima sudah benar-benar bersih dan aman, terlepas dari bagaimana data tersebut dikirim (misalnya, dari aplikasi web, aplikasi mobile, atau request manual).
-- **Konsistensi Pada Semua Sumber Data:** Jika aplikasi memiliki berbagai cara untuk menerima input (misalnya dari API, mobile app, atau web app), hanya validasi di backend yang dapat menjamin konsistensi pembersihan data dari semua sumber tersebut.
+Keamanan di frontend tidak bisa diandalkan karena pengguna yang jahat dapat memanipulasi atau menonaktifkan validasi menggunakan developer tools atau aplikasi HTTP request manual, membuat aplikasi rentan terhadap serangan seperti XSS atau SQL Injection. Oleh karena itu, validasi di backend sangat penting sebagai lapisan pertahanan terakhir untuk memastikan semua data yang diterima benar-benar aman sebelum disimpan atau diproses. Selain itu, validasi di backend juga menjamin konsistensi pembersihan data dari berbagai sumber input, seperti aplikasi web, mobile, atau API.
 
 ### 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+1.  **AJAX GET**
+   - Modifikasi `product.html` dengan mengganti bagian yang menampilkan `adornments_entries` dengan `<div id="adornments_entry_cards"></div>`.
+   - Menambahkan script di bagian bawah untuk mengambil data menggunakan `fetch()` dan tampilkan dengan cara asinkronus.
+   - Membuat fungsi `getAdornmentsEntries()` yang mengambil data adornments dalam format JSON dan `refreshAdornmentsEntries()` yang menampilkan data adornments di halaman menggunakan data dari `getAdornmentsEntries()`.
+2. **AJAX POST**
+   - Menambahkan fungsi `add_adornments_entry_ajax` di `views.py` yang akan menangani POST request untuk menambahkan adornments baru.
+   - Menambahkan path `/create-adornments-entry-ajax/` di `urls.py` untuk mengarahkan POST request ke fungsi `add_adornments_entry_ajax`.
+   - Membuat modal form menggunakan Tailwind CSS yang berisi input untuk name, description, price, size, color, dan quantity. Lalu buat tombol untuk membuka modal. Tambahkan script JavaScript untuk `showModal()` yang menampilkan modal, `hideModal()` yang menyembunyikan modal, dan `addAdornmentsEntry()` yang mengirimkan data form menggunakan `fetch()` POST request ke endpoint
+   `/create-adornments-entry-ajax/` dan melakukan refresh daftar adornments menggunakan `refreshAdornmentsEntries()`.
 
+   Pada `views.py`,
+   ```
+   @csrf_exempt
+   @require_POST
+   def add_adornments_entry_ajax(request):
+      name = strip_tags(request.POST.get("name"))
+      price = request.POST.get("price")
+      description = strip_tags(request.POST.get("description"))
+      size = strip_tags(request.POST.get("size"))
+      color = strip_tags(request.POST.get("color"))
+      quantity = request.POST.get("quantity")
+      user = request.user
+
+      new_adornments = AdornmentsEntry(
+         name=name, price=price,
+         description=description,
+         size=size, color=color,
+         quantity=quantity,
+         user=user
+      )
+      new_adornments.save()
+
+      return HttpResponse(b"CREATED", status=201)
+   ```
+
+   Pada `urls.py`,
+   ```
+   from main.views import add_adornments_entry_ajax
+   from . import views
+   app_name = 'main'
+
+   urlpatterns = [
+      ...
+      path('create-adornments-entry-ajax', add_adornments_entry_ajax, name='add_adornments_entry_ajax'),
+   ]
+   ```
+   
+   Lalu melakukan AJAX GET dan POST pada `products.html`
 </details>
