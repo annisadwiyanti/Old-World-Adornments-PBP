@@ -95,7 +95,8 @@
       .then(response => refreshAdornmentsEntries())
 
       document.getElementById("adornmentsEntryForm").reset(); 
-      document.querySelector("[data-modal-toggle='crudModal']").click();
+      hideModal();
+
 
       return false;
     }
@@ -180,7 +181,7 @@
         modal.classList.add('hidden');
       }, 150); 
     }
-    
+
     document.getElementById("adornmentsEntryForm").addEventListener("submit", (e) => {
       e.preventDefault();
       addAdornmentsEntry();
