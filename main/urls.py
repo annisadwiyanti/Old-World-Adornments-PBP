@@ -7,6 +7,7 @@ from main.views import edit_adornments
 from main.views import delete_adornments
 from main.views import add_adornments_entry_ajax
 from . import views
+from .views import create_adornment_flutter, get_user_adornments_json
 
 
 app_name = 'main'
@@ -26,4 +27,6 @@ urlpatterns = [
     path('products/', views.products, name='products'),
     path('collections/', views.collections, name='collections'),
     path('create-adornments-entry-ajax', add_adornments_entry_ajax, name='add_adornments_entry_ajax'),
+    path('create-flutter/', create_adornment_flutter, name='create_adornment_flutter'),
+    path('json/', get_user_adornments_json, name='get_user_adornments_json'),
 ]

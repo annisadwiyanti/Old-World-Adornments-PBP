@@ -3,7 +3,7 @@
 ### Akses aplikasi pada link berikut👇🏻
 [Old-World Adornments Website](http://annisa-dwiyanti-oldworldadornmentspbp.pbp.cs.ui.ac.id/)
 
-### Datar Tugas👇🏻
+### Daftar Tugas👇🏻
 <details>
 <Summary><b>Tugas 2</b></Summary>
 

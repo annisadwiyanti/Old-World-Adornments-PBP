@@ -14,6 +14,8 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.utils.html import strip_tags
+import json
+from django.http import JsonResponse
 
 # Create your views here.
 @login_required(login_url='/login')
@@ -144,3 +146,32 @@ def add_adornments_entry_ajax(request):
     new_adornments.save()
 
     return HttpResponse(b"CREATED", status=201)
+
+@csrf_exempt
+def create_adornment_flutter(request):
+    if request.method == 'POST':
+        # Parse data dari request body
+        data = json.loads(request.body)
+        
+        # Buat entri baru
+        new_adornment = AdornmentsEntry.objects.create(
+            user=request.user,
+            name=data["name"],
+            price=int(data["price"]),
+            description=data["description"],
+            size=data["size"],
+            color=data["color"],
+            quantity=int(data["quantity"]),
+        )
+
+        new_adornment.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error", "message": "Invalid request method"}, status=400)
+
+@login_required
+def get_user_adornments_json(request):
+    # Ambil hanya item yang terasosiasi dengan pengguna yang login
+    adornments = AdornmentsEntry.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize('json', adornments), content_type='application/json')
